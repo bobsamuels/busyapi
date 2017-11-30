@@ -81,3 +81,9 @@ Time per request:       0.051 [ms] (mean, across all concurrent requests)
 1) "Albuterol"
 2) "Tue Nov 01 2016 09:11:51 GMT-0500 (CDT)"
 
+#Other things
+# Suggested changes to the software architecture/stack that may achieve the goal
+- Not sure redis is the right tool; something like mongodb may be more appropriate.  If pure speed is of the essence, I'd also look into more of a webhook mechansim for posts/puts versus waiting to respond after a transaction has been committed.  You'd want some sort of process monitor in place to restart node (when) it dies.  You also need at least basic auth on the api... and a testing suite in place.  :)
+
+# Suggested changes to the physical architecture/hardware that may achieve the goal
+- Something that scales horizontally pretty well such as AWS instances.  More cores will allow better processing.  Of course, the hacky cluster setup I've produced would be great for production code but the idea is the same.
