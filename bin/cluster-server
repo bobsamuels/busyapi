@@ -1,0 +1,21 @@
+var cluster = require('cluster');
+
+var app = require('../app');
+
+if(cluster.isMaster) {
+    
+    var numWorkers = require('os').cpus().length;
+
+    for(var i = 0; i < numWorkers; i++) {
+        var worker = cluster.fork();
+    }
+    
+    cluster.on('exit', function(worker, code, signal) {
+        cluster.fork();
+    });
+} else {
+    var server = app.listen(3000, function() {
+        //Just for sanity
+        console.log('Process ' + process.pid + ' is listening to all incoming requests');
+    });
+}

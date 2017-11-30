@@ -3,8 +3,6 @@ module.exports = function(app){
 
         // Store the supplied usage data
         var usageId = app.usages.push(req.body);
-        // console.log('Stored usage count: ' + usageId);
-
         res.status(201).json({'id':usageId});
     });
 }
