@@ -9,10 +9,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var redis = require("redis"),
+    client = redis.createClient();
 
-// simple in-memory usage store
-var usages = [];
-app.usages = usages;
+//redis client
+app.client = client;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
